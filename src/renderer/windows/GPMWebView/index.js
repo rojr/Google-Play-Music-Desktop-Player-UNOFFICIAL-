@@ -35,6 +35,8 @@ const waitForExternal = setInterval(() => {
     const GMusic = require('gmusic.js');
     require('gmusic-ui.js')(GMusic);
     require('gmusic-mini-player.js')(GMusic);
+    require('./visualizer');
+
     const GMusicTheme = require('gmusic-theme.js');
 
     window.GMusic = GMusic;
@@ -57,6 +59,8 @@ const waitForExternal = setInterval(() => {
     remote.getCurrentWebContents().insertCSS(
       '::-webkit-scrollbar,::shadow ::-webkit-scrollbar{width:9px;background:0 0}::-webkit-scrollbar-track,::shadow ::-webkit-scrollbar-track{background-color:rgba(0,0,0,.25)}::-webkit-scrollbar-track:hover,::shadow ::-webkit-scrollbar-track:hover{background-color:rgba(0,0,0,.35)}::-webkit-scrollbar-track:active,::shadow ::-webkit-scrollbar-track:active{background-color:rgba(0,0,0,.25)}::-webkit-scrollbar-thumb,::shadow ::-webkit-scrollbar-thumb{background-color:rgba(0,0,0,.3);border-radius:0}::-webkit-scrollbar-thumb:hover,::shadow ::-webkit-scrollbar-thumb:hover{background-color:rgba(0,0,0,.4)}::-webkit-scrollbar-thumb:active,::shadow ::-webkit-scrollbar-thumb:active{background-color:rgba(0,0,0,.4)}' // eslint-disable-line
     );
+
+    remote.getCurrentWebContents().openDevTools();
 
     Emitter.ready = true;
     _.forEach(waitingQueue, (fn) => {
